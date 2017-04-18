@@ -9,12 +9,6 @@ namespace RC.RateLimit.Common
 {
     public class Config
     {
-
-        private static Hashtable CachedConfig = new Hashtable();
-
-        private static object _lock = new object();
-
-
         public static string RedisHost
         {
             get { return ReadConfiguration("RateLimit.RedisHost", ""); }
@@ -44,7 +38,6 @@ namespace RC.RateLimit.Common
         {
             return System.Configuration.ConfigurationManager.AppSettings[key];
         }
-
     }
 }
 
