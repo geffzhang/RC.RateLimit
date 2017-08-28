@@ -1,42 +1,25 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Diagnostics;
+using static System.Int32;
 
 namespace RC.RateLimit.Common
 {
     public class Config
     {
-        public static string RedisHost
-        {
-            get { return ReadConfiguration("RateLimit.RedisHost", ""); }
-        }
+        public static string RedisHost => ReadConfiguration("RateLimit.RedisHost", "");
 
-        public static int RedisPort
-        {
-            get { return Int32.Parse(ReadConfiguration("RateLimit.RedisPort", "")); }
-        }
+        public static int RedisPort => Parse(ReadConfiguration("RateLimit.RedisPort", ""));
 
-        public static int PerSecondRateLimit
-        {
-            get { return Int32.Parse(ReadConfiguration("RateLimit.PerSecondRateLimit", "")); }
-        }
+        public static int PerSecondRateLimit => Parse(ReadConfiguration("RateLimit.PerSecondRateLimit", ""));
 
-        public static int PerMinuteRateLimit
-        {
-            get { return Int32.Parse(ReadConfiguration("RateLimit.PerMinuteRateLimit", "")); }
-        }
+        public static int PerMinuteRateLimit => Parse(ReadConfiguration("RateLimit.PerMinuteRateLimit", ""));
 
-        public static int PerHourRateLimit
-        {
-            get { return Int32.Parse(ReadConfiguration("RateLimit.PerHourRateLimit", "")); }
-        }
+        public static int PerHourRateLimit => Parse(ReadConfiguration("RateLimit.PerHourRateLimit", ""));
 
         public static string ReadConfiguration(string key, string defaultValue = null)
         {
-            return System.Configuration.ConfigurationManager.AppSettings[key];
+            var keyVal = System.Configuration.ConfigurationManager.AppSettings[key];
+            return !string.Equals(keyVal, null, StringComparison.Ordinal) ? keyVal : defaultValue;
         }
     }
 }
